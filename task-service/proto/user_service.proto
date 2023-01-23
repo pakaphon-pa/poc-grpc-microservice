@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package task;
+
+option go_package = "./pb";
+
+service UserService {
+  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
+}
+
+message GetUserInfoRequest {
+  int64 userId = 1;
+}
+
+message GetUserInfoResponse {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+}

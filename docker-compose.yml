@@ -1,0 +1,49 @@
+version: '3'
+services:
+  task-service:
+    container_name: task-service
+    build: 
+      context: ./task-service
+      dockerfile: Dockerfile
+    ports: 
+      - "8082:8082"
+    restart: on-failure
+    volumes:
+      - ./task-service:/app
+    networks:
+      - app
+
+  user-service:
+    container_name: user-service
+    build: 
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports: 
+      - "8081:8081"
+    restart: on-failure
+    volumes:
+      - ./user-service:/app
+    networks:
+      - app
+
+  api-gateway:
+    container_name: api-gateway
+    build: 
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports: 
+      - "8080:8080"
+    restart: on-failure
+    volumes:
+      - ./api-gateway:/app
+    networks:
+      - app
+      
+networks:
+  app:
+
+volumes:
+  task-service:
+  api-gateway:
+  user-service:
+
